@@ -1,4 +1,4 @@
-appId: com.electron.app
+appId: com.vpnconnector.app
 productName: vpnconnector
 directories:
   buildResources: build
@@ -12,7 +12,7 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: vpnconnector
+  executableName: VPNConnector
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
@@ -20,5 +20,4 @@ nsis:
   createDesktopShortcut: always
 npmRebuild: false
 publish:
-  provider: generic
-  url: https://example.com/auto-updates
+  provider: github

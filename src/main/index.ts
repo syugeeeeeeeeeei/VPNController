@@ -16,7 +16,7 @@ function createWindow(): void {
     height: 670,
     show: false,
     autoHideMenuBar: true,
-    resizable: false, // ★ ウィンドウサイズを固定
+    resizable: false,
     ...(process.platform === "linux" ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, "../preload/index.js"),
@@ -46,7 +46,7 @@ function createWindow(): void {
 }
 
 app.whenReady().then(() => {
-  electronApp.setAppUserModelId("com.vpnconnector");
+  electronApp.setAppUserModelId("com.vpnconnector.app");
 
   app.on("browser-window-created", (_, window) => {
     optimizer.watchWindowShortcuts(window);
