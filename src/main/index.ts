@@ -3,7 +3,7 @@ import { app, BrowserWindow, shell } from "electron";
 import log from "electron-log";
 import { autoUpdater } from "electron-updater";
 import { join } from "path";
-import icon from "../../resources/icon.png?asset";
+import icon from "../../resources/vpn.png?asset";
 import { IpcHandler } from "./IpcHandler";
 
 // --- Logger for auto-updater ---
@@ -21,7 +21,8 @@ function createWindow(): void {
     webPreferences: {
       preload: join(__dirname, "../preload/index.js"),
       sandbox: false
-    }
+    },
+    icon
   });
 
   // Register IPC handlers
