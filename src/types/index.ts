@@ -19,21 +19,23 @@ export type VPNStatus = "connected" | "disconnected" | "connecting" | "disconnec
  */
 export const IPC_CHANNELS = {
   // --- VPN Connection Management ---
-  getConnections: "vpn:get-connections", // すべての接続情報を取得
-  addConnection: "vpn:add-connection", // 新しい接続情報を追加
-  updateConnection: "vpn:update-connection", // 既存の接続情報を更新
-  deleteConnection: "vpn:delete-connection", // 接続情報を削除
+  getConnections: "vpn:get-connections",
+  addConnection: "vpn:add-connection",
+  updateConnection: "vpn:update-connection",
+  deleteConnection: "vpn:delete-connection",
 
   // --- VPN Operation ---
-  connect: "vpn:connect", // VPN接続を実行
-  disconnect: "vpn:disconnect", // VPN切断を実行
-  getStatus: "vpn:get-status", // VPNの現在の状態を取得
+  connect: "vpn:connect",
+  disconnect: "vpn:disconnect",
+  getStatus: "vpn:get-status",
+  interrupt: "vpn:interrupt", // ★ 接続中断処理を追加
 
   // --- Application Settings ---
-  getCliPath: "settings:get-cli-path", // vpncli.exeのパスを取得
-  setCliPath: "settings:set-cli-path", // vpncli.exeのパスを設定
-  validateCliPath: "settings:validate-cli-path", // vpncli.exeのパスを検証
+  getCliPath: "settings:get-cli-path",
+  setCliPath: "settings:set-cli-path",
+  validateCliPath: "settings:validate-cli-path",
 
-  // --- VPN Status Updates (Main -> Renderer) ---
-  onVpnStatusChanged: "vpn:status-changed" // VPN状態の変更を通知
+  // --- Events (Main -> Renderer) ---
+  onVpnStatusChanged: "vpn:status-changed",
+  onVpnLog: "vpn:on-log" // ★ ログ通知イベントを追加
 } as const;

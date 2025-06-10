@@ -1,8 +1,14 @@
 import { electronApp, is, optimizer } from "@electron-toolkit/utils";
 import { app, BrowserWindow, shell } from "electron";
+import log from "electron-log";
+import { autoUpdater } from "electron-updater";
 import { join } from "path";
 import icon from "../../resources/icon.png?asset";
-import { IpcHandler } from "./IpcHandler"; // ★ IpcHandlerをインポート
+import { IpcHandler } from "./IpcHandler";
+
+// --- Logger for auto-updater ---
+autoUpdater.logger = log;
+log.transports.file.level = "info";
 
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
@@ -10,6 +16,7 @@ function createWindow(): void {
     height: 670,
     show: false,
     autoHideMenuBar: true,
+    resizable: false, // ★ ウィンドウサイズを固定
     ...(process.platform === "linux" ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, "../preload/index.js"),
@@ -17,11 +24,13 @@ function createWindow(): void {
     }
   });
 
-  // ★ IpcHandlerのインスタンスを作成し、ハンドラを登録
+  // Register IPC handlers
   new IpcHandler(mainWindow).register();
 
   mainWindow.on("ready-to-show", () => {
     mainWindow.show();
+    // Check for updates and notify the user
+    autoUpdater.checkForUpdatesAndNotify();
   });
 
   mainWindow.webContents.setWindowOpenHandler((details) => {

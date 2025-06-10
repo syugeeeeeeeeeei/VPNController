@@ -1,7 +1,7 @@
 import * as crypto from "crypto";
 import Store from "electron-store";
 import * as fs from "fs/promises";
-import * as keytar from "keytar";
+import keytar from "keytar";
 import type { VPNConnection } from "../../src/types";
 
 // keytarが資格情報を保存する際のサービス名
@@ -25,7 +25,7 @@ export class StoreService {
     this.store = new Store<StoreSchema>({
       defaults: {
         connections: [],
-        cliPath: "C:\\Program Files (x86)\\Cisco\\Cisco Secure Client\\vpncli.exe"
+        cliPath: "C:/Program Files (x86)/Cisco/Cisco Secure Client/vpncli.exe"
       }
     });
   }

@@ -33,6 +33,7 @@ export class IpcHandler {
     ipcMain.handle(IPC_CHANNELS.connect, (_, id) => this.vpnService.connect(id));
     ipcMain.handle(IPC_CHANNELS.disconnect, this.vpnService.disconnect);
     ipcMain.handle(IPC_CHANNELS.getStatus, this.vpnService.getStatus);
+    ipcMain.handle(IPC_CHANNELS.interrupt, this.vpnService.interrupt); // ★ ハンドラを登録
 
     // --- Application Settings ---
     ipcMain.handle(IPC_CHANNELS.getCliPath, this.storeService.getCliPath);
